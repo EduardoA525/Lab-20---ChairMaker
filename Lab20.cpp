@@ -35,6 +35,11 @@ public:
             prices[i] = cost[i];
     }
 
+    //destructor because prices is NEW
+    ~Chair() {
+        delete[] prices;
+    }
+
     // setters and getters
     void setLegs(int l)      { legs = l; }
     int getLegs()            { return legs; }
@@ -51,7 +56,7 @@ public:
     }
 
     void print() {
-        cout << "CHAIR DATA - legs: " << legs << endl; //error
+        cout << "CHAIR DATA - legs: " << legs << endl;
         cout << "Price history: " ;
         for (int i = 0; i < SIZE; i++)
             cout << prices[i] << " ";
@@ -71,10 +76,14 @@ int main() {
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
+    
+    //delete new stuff
+    delete chairPtr;
+    chairPtr = nullptr;
 
     //creating dynamic chair object with constructor
-    double livingPrices[SIZE] = {525.25, 434.34, 252.52};
-    Chair *livingChair = new Chair(3, livingPrices);
+    double livingChairPrices[SIZE] = {525.25, 434.34, 252.52};
+    Chair *livingChair = new Chair(3, livingChairPrices);
 
     livingChair->print();
     delete livingChair;
@@ -91,8 +100,6 @@ int main() {
     //deletion of new stuff
     delete[] collection;
     collection = nullptr;
-    for (int i = 0; i < SIZE; i++)
-        collection[i].print();
     
     return 0;
 }
