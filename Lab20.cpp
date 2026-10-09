@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 const int SIZE = 3;
@@ -12,14 +14,19 @@ class Chair {
 private:
     int legs;
     double * prices;
+
 public:
-    // constructors
+    //constructors updated
     Chair() {
         prices = new double[SIZE];
-        legs = 0;
+        legs = rand() % 2 + 3;
+
+        const int MIN = 10000, MAX = 99999;
+
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = (rand() % (MAX-MIN+1) + MIN) / 100.0;
     }
+
     Chair(int l) {
         prices = new double[SIZE];
         legs = l;
@@ -57,12 +64,14 @@ int main() {
 
     //creating pointer to first chair object
     Chair *chairPtr = new Chair;
+
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
 
     //creating dynamic chair object with constructor
     Chair *livingChair = new Chair(3);
+
     livingChair->setPrices(525.25, 434.34, 252.52);
     livingChair->print();
     delete livingChair;
@@ -70,6 +79,7 @@ int main() {
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
+
     collection[0].setLegs(4);
     collection[0].setPrices(441.41, 552.52, 663.63);
     collection[1].setLegs(4);
