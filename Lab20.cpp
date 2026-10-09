@@ -13,7 +13,7 @@ const int SIZE = 3;
 class Chair {
 private:
     int legs;
-    double * prices;
+    double *prices;
 
 public:
     //constructors updated
@@ -27,11 +27,12 @@ public:
             prices[i] = (rand() % (MAX-MIN+1) + MIN) / 100.0;
     }
 
-    Chair(int l) {
+    Chair(int l, double cost[]) {
         prices = new double[SIZE];
         legs = l;
+
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = cost[i];
     }
 
     // setters and getters
@@ -61,6 +62,8 @@ public:
 
 int main() {
     cout << fixed << setprecision(2);
+
+    srand(time(0));
 
     //creating pointer to first chair object
     Chair *chairPtr = new Chair;
